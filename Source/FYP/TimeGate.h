@@ -19,7 +19,13 @@ public:
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
-
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power")
+	bool reached;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power")
+	bool isActive;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power")
+	float gateTime = 10.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Power")
+	float timeLeft;
 	
 };
