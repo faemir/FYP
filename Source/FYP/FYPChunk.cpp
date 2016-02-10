@@ -16,7 +16,10 @@ AFYPChunk::AFYPChunk()
 void AFYPChunk::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if (!spawnedSegments) {
+		//makeSegments();
+		spawnedSegments = true;
+	}
 }
 
 // Called every frame
@@ -25,4 +28,13 @@ void AFYPChunk::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 
 }
+
+//void AFYPChunk::getLastSegSplineTrans()
+//{
+//
+//}
+//
+//void AFYPChunk::makeSegments()
+//{
+//}
 
