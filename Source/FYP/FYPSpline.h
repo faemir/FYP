@@ -185,5 +185,6 @@ public:
 
 	void compSplinePointsToTrackArray(int32 nsp);
 
-	USplineMeshComponent* chunkSplineMesh;
+	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	USplineMeshComponent* chunkSplineMesh;*/
 };

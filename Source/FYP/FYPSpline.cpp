@@ -35,7 +35,8 @@ AFYPSpline::AFYPSpline()
 void AFYPSpline::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+
 }
 
 // Called every frame
@@ -56,25 +57,34 @@ void AFYPSpline::OnConstruction(const FTransform & Transform)
 	NumSplinePoints = theSpline->GetNumberOfSplinePoints();
 
 	compSplinePointsToTrackArray(NumSplinePoints);
-	
+
 	//can't do this in the constructor, so it's done on construction of object in-game
 	for (int32 i = 0; i <= (NumSplinePoints - 2); i++) {
 		addNewChunk_Implementation(i, trackChunk);
 	}
+	FString tempstr = FString::FromInt(theSpline->GetNumSplinePoints());
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *tempstr);
+	/*for (int32 k = 0; k <= NumSplinePoints-1; k++) {
+		FString tempLoc = theSpline->GetLocationAtSplinePoint(k, ESplineCoordinateSpace::Local).ToString();
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *tempLoc);
+	}*/
 }
 
 //Takes the spline loc/tan and creates a spline mesh according to it
 void AFYPSpline::addNewChunk_Implementation(int32 ci, UStaticMesh* tm)
 {
 	int32 curSplinePoint = ci;
-	int32 nextSplinePoint = (curSplinePoint + 1) % NumSplinePoints;
+	int32 nextSplinePoint = (curSplinePoint + 1) % NumSplinePoints; //why did I do this again?
 	FVector curLoc = theSpline->GetLocationAtSplinePoint(curSplinePoint, ESplineCoordinateSpace::Local);
 	FVector curTang = theSpline->GetTangentAtSplinePoint(curSplinePoint, ESplineCoordinateSpace::Local);
 	FVector nextLoc = theSpline->GetLocationAtSplinePoint(nextSplinePoint, ESplineCoordinateSpace::Local);
 	FVector nextTang = theSpline->GetTangentAtSplinePoint(nextSplinePoint, ESplineCoordinateSpace::Local);
-	UStaticMesh* trackChunkStaticMesh = tm; //using tm directly
-	chunkSplineMesh = ConstructObject<USplineMeshComponent>(USplineMeshComponent::StaticClass(), this);
-	
+	UStaticMesh* trackChunkStaticMesh = tm; //could use tm directly
+	USplineMeshComponent* chunkSplineMesh = NewObject<USplineMeshComponent>(this);
+	chunkSplineMesh->CreationMethod = EComponentCreationMethod::UserConstructionScript;
+	chunkSplineMesh->SetMobility(EComponentMobility::Movable); //needed because root comp is movable
+	chunkSplineMesh->RegisterComponent();
+	chunkSplineMesh->AttachTo(RootComponent);
 	chunkSplineMesh->SetStaticMesh(trackChunkStaticMesh);
 	chunkSplineMesh->SetStartAndEnd(curLoc, curTang, nextLoc, nextTang);
 	//chunkSplineMesh->SetStartScale(FVector2D(1.0, 1.0));
@@ -118,6 +128,8 @@ void AFYPSpline::storeSplinePoints_Implementation()
 		FSplinePoints tempSplinePoint = tempChosenPieceArray[j];
 		theSpline->AddSplinePoint(tempSplinePoint.SplinePointLoc, ESplineCoordinateSpace::Local);
 		theSpline->SetTangentAtSplinePoint(j, tempChosenPieceArray[j].SplinePointTan, ESplineCoordinateSpace::Local);
+		/*FString tempLoc = tempSplinePoint.SplinePointLoc.ToString();
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *tempLoc);*/
 	}
 }
 
