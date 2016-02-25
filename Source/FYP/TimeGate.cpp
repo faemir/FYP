@@ -14,8 +14,12 @@ ATimeGate::ATimeGate()
 	timeGateMesh->SetMobility(EComponentMobility::Movable);
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> timeg(TEXT("/Game/Meshes/timegate.timegate"));
 	timeGateMesh->SetStaticMesh(timeg.Object);
-
 	timeGateMesh->OnComponentBeginOverlap.AddDynamic(this, &ATimeGate::OnOverlapBegin);
+
+	gateParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("timegate particle effect"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> pbar(TEXT("/Game/Particles/P_ParticleBarrier.P_ParticleBarrier"));
+	gateParticle->Template = pbar.Object;
+	gateParticle->AttachTo(timeGateMesh);
 }
 
 // Called when the game starts or when spawned

@@ -33,6 +33,8 @@ public:
 	FTimerHandle THandle;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	UStaticMeshComponent* timeGateMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	UParticleSystemComponent* gateParticle;
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void StartCountDown();
