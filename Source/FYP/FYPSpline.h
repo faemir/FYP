@@ -174,6 +174,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	USplineComponent* theSpline;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	TArray<USplineMeshComponent*> listofsplinemeshes;
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	//USceneComponent* SceneComponent;
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void addNewChunk(int32 ci, UStaticMesh* tm);

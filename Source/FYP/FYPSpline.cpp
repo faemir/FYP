@@ -13,10 +13,17 @@ AFYPSpline::AFYPSpline()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	//this can only be used in here, NOT onconstruction
+	
+	//SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("scene root comp"));
+	//SceneComponent->SetMobility(EComponentMobility::Static);
+	//theSpline = NewObject<USplineComponent>(this, TEXT("the spline"));
 	theSpline = CreateDefaultSubobject<USplineComponent>(TEXT("the spline"));
-
+	theSpline->SetMobility(EComponentMobility::Movable);
+	RootComponent = theSpline;
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> trackp(TEXT("/Game/Meshes/trackpiece.trackpiece"));
+	trackChunk = trackp.Object;
 	//NumSplinePoints = 0;
-
+	//RootComponent = theSpline;
 	//splinePointStore.AddDefaulted(4);
 	//splinePointStore[0].SplinePointLoc = { 0, 0, 0 };
 	//splinePointStore[0].SplinePointTan = { 2050.0, 0, 0 };
@@ -26,9 +33,6 @@ AFYPSpline::AFYPSpline()
 	//splinePointStore[2].SplinePointTan = { 2150.0, 455.0, 0 };
 	//splinePointStore[3].SplinePointLoc = { 5610.0, 910.0, 0 };
 	//splinePointStore[3].SplinePointTan = { 1990.0, 0, 0 };
-
-	
-	
 }
 
 // Called when the game starts or when spawned
@@ -49,21 +53,24 @@ void AFYPSpline::Tick( float DeltaTime )
 void AFYPSpline::OnConstruction(const FTransform & Transform)
 {
 	Super::OnConstruction(Transform);
+	
 
-	RootComponent = theSpline;
+	
+
 
 	theSpline->ClearSplinePoints(); //need to remove default 2 points
 	storeSplinePoints_Implementation();
 	NumSplinePoints = theSpline->GetNumberOfSplinePoints();
-
+	
 	compSplinePointsToTrackArray(NumSplinePoints);
-
+	//UE_LOG(LogTemp, Error, TEXT("%s"), "hello");
 	//can't do this in the constructor, so it's done on construction of object in-game
 	for (int32 i = 0; i <= (NumSplinePoints - 2); i++) {
+		//UE_LOG(LogTemp, Error, TEXT("%s"), "hello");
 		addNewChunk_Implementation(i, trackChunk);
 	}
-	FString tempstr = FString::FromInt(theSpline->GetNumSplinePoints());
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *tempstr);
+	FString tempstr = FString::FromInt(theSpline->GetNumberOfSplinePoints());
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *tempstr);
 	/*for (int32 k = 0; k <= NumSplinePoints-1; k++) {
 		FString tempLoc = theSpline->GetLocationAtSplinePoint(k, ESplineCoordinateSpace::Local).ToString();
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *tempLoc);
@@ -74,23 +81,26 @@ void AFYPSpline::OnConstruction(const FTransform & Transform)
 void AFYPSpline::addNewChunk_Implementation(int32 ci, UStaticMesh* tm)
 {
 	int32 curSplinePoint = ci;
-	int32 nextSplinePoint = (curSplinePoint + 1) % NumSplinePoints; //why did I do this again?
+	int32 nextSplinePoint = (curSplinePoint + 1) % NumSplinePoints; //why did I do this again??
 	FVector curLoc = theSpline->GetLocationAtSplinePoint(curSplinePoint, ESplineCoordinateSpace::Local);
 	FVector curTang = theSpline->GetTangentAtSplinePoint(curSplinePoint, ESplineCoordinateSpace::Local);
 	FVector nextLoc = theSpline->GetLocationAtSplinePoint(nextSplinePoint, ESplineCoordinateSpace::Local);
 	FVector nextTang = theSpline->GetTangentAtSplinePoint(nextSplinePoint, ESplineCoordinateSpace::Local);
 	UStaticMesh* trackChunkStaticMesh = tm; //could use tm directly
-	USplineMeshComponent* chunkSplineMesh = NewObject<USplineMeshComponent>(this);
+	USplineMeshComponent* chunkSplineMesh = NewObject<USplineMeshComponent>(this, NAME_None);
 	chunkSplineMesh->CreationMethod = EComponentCreationMethod::UserConstructionScript;
 	chunkSplineMesh->SetMobility(EComponentMobility::Movable); //needed because root comp is movable
-	chunkSplineMesh->RegisterComponent();
-	chunkSplineMesh->AttachTo(RootComponent);
+	chunkSplineMesh->AttachTo(RootComponent, NAME_None);
 	chunkSplineMesh->SetStaticMesh(trackChunkStaticMesh);
+	//chunkSplineMesh->RegisterComponent();
 	chunkSplineMesh->SetStartAndEnd(curLoc, curTang, nextLoc, nextTang);
-	//chunkSplineMesh->SetStartScale(FVector2D(1.0, 1.0));
-	//chunkSplineMesh->SetEndScale(FVector2D(1.0, 1.0));
+	chunkSplineMesh->SetStartScale(FVector2D(1.0, 1.0));
+	chunkSplineMesh->SetEndScale(FVector2D(1.0, 1.0));
 	chunkSplineMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	chunkSplineMesh->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	FinishAndRegisterComponent(chunkSplineMesh);
+	listofsplinemeshes.Add(chunkSplineMesh);
+	
 }
 
 void AFYPSpline::storeSplinePoints_Implementation()
@@ -148,4 +158,3 @@ void AFYPSpline::compSplinePointsToTrackArray(int32 nsp)
 		trackArray.RemoveAt(trackArray.Num() - 1);
 	}
 }
-

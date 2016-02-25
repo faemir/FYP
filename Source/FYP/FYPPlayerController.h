@@ -3,17 +3,19 @@
 #pragma once
 
 #include "GameFramework/PlayerController.h"
+#include "FYPGameEventInterface.h"
 #include "FYPPlayerController.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class FYP_API AFYPPlayerController : public APlayerController
+class FYP_API AFYPPlayerController : public APlayerController, public IFYPGameEventInterface
 {
 	GENERATED_BODY()
 	
-	
-	
-	
+public:
+	virtual void RoundStart_Implementation() override;
+	virtual void RoundEnd_Implementation() override;
+	virtual void GateReached_Implementation() override;
 };

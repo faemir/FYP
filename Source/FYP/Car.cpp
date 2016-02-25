@@ -33,3 +33,14 @@ void ACar::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 }
 
+void ACar::RoundStart_Implementation() {
+	//return("RoundStart_Implementation()");
+}
+
+void ACar::RoundEnd_Implementation() {
+	//return("RoundEnd_Implementation()");
+}
+
+void ACar::GateReached_Implementation() {
+	//return("GateReached_Implementation()");
+}
