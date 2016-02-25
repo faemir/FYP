@@ -68,10 +68,10 @@ void AFYPChunk::MakeSegments_Implementation()
 		FRotator gRot = { 0.f, 0.f, 0.f };
 		ATimeGate* TGate = World->SpawnActor<ATimeGate>(ATimeGate::StaticClass(), gLoc, gRot, SpawnParams);
 		TGate->AttachRootComponentTo(RootComponent, NAME_None, EAttachLocation::KeepRelativeOffset, true);
-		/*TGate->SetActorEnableCollision(false);
+		TGate->SetActorEnableCollision(true);
 		TGate->timeGateMesh->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 		TGate->timeGateMesh->SetCollisionObjectType(ECollisionChannel::ECC_Destructible);
-		TGate->timeGateMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);*/
+		TGate->timeGateMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
 		//this->RegisterAllComponents();
 		
 	}

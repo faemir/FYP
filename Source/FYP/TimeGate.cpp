@@ -40,10 +40,9 @@ void ATimeGate::Tick( float DeltaTime )
 
 //overlap event (when the player drives through it)
 void ATimeGate::OnOverlapBegin(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	UE_LOG(LogTemp, Warning, TEXT("overlap begin!"));
-	ACar* castCar = Cast<ACar>(OtherActor->GetClass());
-	if (castCar) {
-		UE_LOG(LogTemp, Warning, TEXT("car overlap!"));
+	UE_LOG(LogTemp, Log, TEXT("overlap begin!"));
+	if (OtherActor->GetClass()->IsChildOf(ACar::StaticClass())) {
+		UE_LOG(LogTemp, Log, TEXT("car overlap!"));
 		IFYPGameEventInterface* TheInterface = NULL;
 		TActorIterator< AActor > ActorItr(GetWorld());
 		while (ActorItr)
@@ -58,8 +57,9 @@ void ATimeGate::OnOverlapBegin(class AActor* OtherActor, class UPrimitiveCompone
 			}
 			++ActorItr;
 		}
+		UE_LOG(LogTemp, Warning, TEXT("destroying gate"));
+		this->Destroy();
 	}
-	GateReached_Implementation();
 }
 
 //countdown for when this is the active gate
@@ -96,6 +96,5 @@ void ATimeGate::RoundEnd_Implementation() {
 
 //we've passed the gate, so destroy it!
 void ATimeGate::GateReached_Implementation() {
-	UE_LOG(LogTemp, Warning, TEXT("destroying gate"));
-	this->Destroy();
+
 }
