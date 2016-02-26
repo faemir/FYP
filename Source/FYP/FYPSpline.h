@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "FYPSpline.generated.h"
 
 
@@ -184,13 +185,14 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void addNewChunk(int32 ci, UStaticMesh* tm);
-	void addNewChunk_Implementation(int32 ci, UStaticMesh* tm);
+	virtual void addNewChunk_Implementation(int32 ci, UStaticMesh* tm);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void storeSplinePoints();
-	void storeSplinePoints_Implementation();
+	virtual void storeSplinePoints_Implementation();
 
-	void compSplinePointsToTrackArray(int32 nsp);
+	//void compSplinePointsToTrackArray(int32 nsp);
+	virtual	void compSplinePointsToTrackArray(int32 nsp);
 
 	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	USplineMeshComponent* chunkSplineMesh;*/

@@ -3,8 +3,6 @@
 #include "FYP.h"
 #include "FYPSpline.h"
 #include <random>
-#include "Kismet/KismetMathLibrary.h"
-
 
 // Sets default values
 AFYPSpline::AFYPSpline()

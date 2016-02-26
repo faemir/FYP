@@ -8,7 +8,6 @@
 #include "EngineUtils.h"
 #include "FYPChunk.generated.h"
 
-
 UCLASS()
 class FYP_API AFYPChunk : public AActor
 {
@@ -52,5 +51,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	USceneComponent* SceneComponent;
-
 };

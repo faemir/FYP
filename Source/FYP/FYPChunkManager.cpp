@@ -14,6 +14,7 @@ AFYPChunkManager::AFYPChunkManager()
 	RootComponent = SceneComponent;
 	RootComponent->SetMobility(EComponentMobility::Static);
 
+
 }
 
 // Called when the game starts or when spawned
@@ -23,11 +24,7 @@ void AFYPChunkManager::BeginPlay()
 	
 	AddChunk_Implementation();
 	FTimerHandle THandle;
-	GetWorldTimerManager().SetTimer(THandle, this, &AFYPChunkManager::SecondChunk, 0.1f);
-}
-
-void AFYPChunkManager::SecondChunk() {
-	AddChunk_Implementation();
+	GetWorldTimerManager().SetTimer(THandle, this, &AFYPChunkManager::AddChunk_Implementation, 0.5f);
 }
 
 // Called every frame
@@ -41,8 +38,18 @@ void AFYPChunkManager::AddChunk_Implementation() {
 	UWorld* const World = GetWorld();
 	if (World) {
 		if (levelChunks.Num() == 0) {
+			//first bit needs to not have a timegate, and be straight so use child class 'FYPStartSpline'
+			AFYPStartSpline* startingSpline = World->SpawnActor<AFYPStartSpline>(AFYPStartSpline::StaticClass());
+			startingSpline->AttachRootComponentTo(RootComponent, NAME_None, EAttachLocation::KeepWorldPosition, true);
+
+			AFYPSpline* castStart = Cast<AFYPSpline>(startingSpline);
+			USplineComponent* lastStrSpline = castStart->theSpline;
+			FTransform strTrans = lastStrSpline->GetTransformAtSplinePoint((lastStrSpline->GetNumberOfSplinePoints() - 1), ESplineCoordinateSpace::World, false);
+			FVector strLoc = strTrans.GetLocation();
+			FRotator strRot = strTrans.GetRotation().Rotator();
+
 			FActorSpawnParameters SpawnParams;
-			AFYPChunk* firstChunk = World->SpawnActor<AFYPChunk>(AFYPChunk::StaticClass(), SpawnParams);
+			AFYPChunk* firstChunk = World->SpawnActor<AFYPChunk>(AFYPChunk::StaticClass(), strLoc, strRot, SpawnParams);
 			firstChunk->AttachRootComponentTo(RootComponent, NAME_None, EAttachLocation::KeepWorldPosition, true);
 			levelChunks.Add(firstChunk);
 		}

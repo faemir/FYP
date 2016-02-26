@@ -4,6 +4,8 @@
 
 #include "GameFramework/Actor.h"
 #include "FYPChunk.h"
+#include "FYPStartSpline.h"
+#include "FYPSpline.h"
 #include "FYPGameEventInterface.h"
 #include "FYPChunkManager.generated.h"
 
@@ -28,6 +30,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	USceneComponent* SceneComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	AFYPStartSpline* startingSpline;
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void AddChunk();
 	void AddChunk_Implementation();
@@ -35,8 +40,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void RemoveChunk(int32 chunkToRemove);
 	void RemoveChunk_Implementation(int32 chunkToRemove);
-
-	void SecondChunk();
 	
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;

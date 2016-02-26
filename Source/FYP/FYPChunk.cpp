@@ -3,7 +3,6 @@
 #include "FYP.h"
 #include "FYPChunk.h"
 
-
 // Sets default values
 AFYPChunk::AFYPChunk()
 {
@@ -62,7 +61,6 @@ void AFYPChunk::MakeSegments_Implementation()
 			curChunkScore += 1;
 			//this->RegisterAllComponents();
 		}
-		//add timegates (FIXME: need to make it not do this for the first one)
 		FActorSpawnParameters SpawnParams;
 		FVector gLoc = { 0.f, 0.f, 0.f };
 		FRotator gRot = { 0.f, 0.f, 0.f };
@@ -73,7 +71,6 @@ void AFYPChunk::MakeSegments_Implementation()
 		TGate->timeGateMesh->SetCollisionObjectType(ECollisionChannel::ECC_Destructible);
 		TGate->timeGateMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
 		//this->RegisterAllComponents();
-		
 	}
 }
 
