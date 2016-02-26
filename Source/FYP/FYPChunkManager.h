@@ -3,10 +3,14 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "FYPChunk.h"
+#include "FYPStartSpline.h"
+#include "FYPSpline.h"
+#include "FYPGameEventInterface.h"
 #include "FYPChunkManager.generated.h"
 
 UCLASS()
-class FYP_API AFYPChunkManager : public AActor
+class FYP_API AFYPChunkManager : public AActor, public IFYPGameEventInterface
 {
 	GENERATED_BODY()
 	
@@ -20,6 +24,25 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	TArray<AFYPChunk *> levelChunks;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	USceneComponent* SceneComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	AFYPStartSpline* startingSpline;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
+	void AddChunk();
+	void AddChunk_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
+	void RemoveChunk(int32 chunkToRemove);
+	void RemoveChunk_Implementation(int32 chunkToRemove);
 	
-	
+	virtual void RoundStart_Implementation() override;
+	virtual void RoundEnd_Implementation() override;
+	virtual void GateReached_Implementation() override;
+
 };

@@ -3,6 +3,9 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "FYPSpline.h"
+#include "TimeGate.h"
+#include "EngineUtils.h"
 #include "FYPChunk.generated.h"
 
 UCLASS()
@@ -20,6 +23,32 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
-	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
+	void getLastSegSplineTrans();
+	void getLastSegSplineTrans_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
+	void MakeSegments();
+	void MakeSegments_Implementation();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	TArray<AFYPSpline* > Segments;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	int32 chunkScore;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	AFYPSpline* testspline;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	bool spawnedSegments;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	FTransform prevSeg;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	ATimeGate* chunksTimeGate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	USceneComponent* SceneComponent;
 };

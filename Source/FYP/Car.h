@@ -3,10 +3,11 @@
 #pragma once
 
 #include "GameFramework/Pawn.h"
+#include "FYPGameEventInterface.h"
 #include "Car.generated.h"
 
 UCLASS()
-class FYP_API ACar : public APawn
+class FYP_API ACar : public APawn, public IFYPGameEventInterface
 {
 	GENERATED_BODY()
 
@@ -23,6 +24,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-	
+	virtual void RoundStart_Implementation() override;
+	virtual void RoundEnd_Implementation() override;
+	virtual void GateReached_Implementation() override;
 	
 };

@@ -3,6 +3,14 @@
 #include "FYP.h"
 #include "FYPPlayerController.h"
 
+void AFYPPlayerController::RoundStart_Implementation() {
 
+}
 
+void AFYPPlayerController::RoundEnd_Implementation() {
 
+}
+
+void AFYPPlayerController::GateReached_Implementation() {
+	//this is modifying UMG widgets so is in blueprint
+}
