@@ -11,6 +11,6 @@ void AFYPPlayerController::RoundEnd_Implementation() {
 
 }
 
-void AFYPPlayerController::GateReached_Implementation() {
-	//this is modifying UMG widgets so is in blueprint
+void AFYPPlayerController::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
+
 }

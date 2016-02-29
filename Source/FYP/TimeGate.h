@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "FYPGameEventInterface.h"
 #include "Car.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "TimeGate.generated.h"
 
 UCLASS()
@@ -47,5 +48,5 @@ public:
 	
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;
-	virtual void GateReached_Implementation() override;
+	virtual void GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) override;
 };

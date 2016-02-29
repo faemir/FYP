@@ -17,5 +17,5 @@ class FYP_API AFYPPlayerController : public APlayerController, public IFYPGameEv
 public:
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;
-	virtual void GateReached_Implementation() override;
+	virtual void GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) override;
 };

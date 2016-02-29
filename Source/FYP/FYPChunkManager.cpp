@@ -84,6 +84,6 @@ void AFYPChunkManager::RoundEnd_Implementation() {
 	//return("RoundEnd_Implementation()");
 }
 
-void AFYPChunkManager::GateReached_Implementation() {
+void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 	AddChunk_Implementation();
 }

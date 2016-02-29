@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "FYPGameEventInterface.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -135,7 +136,7 @@ struct FtrackPieces
 };
 
 UCLASS()
-class FYP_API AFYPSpline : public AActor
+class FYP_API AFYPSpline : public AActor, public IFYPGameEventInterface
 {
 	GENERATED_BODY()
 	
@@ -176,12 +177,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	USplineComponent* theSpline;
 
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	TArray<USplineMeshComponent*> listofsplinemeshes;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-	//USceneComponent* SceneComponent;
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void addNewChunk(int32 ci, UStaticMesh* tm);
@@ -191,9 +188,9 @@ public:
 	void storeSplinePoints();
 	virtual void storeSplinePoints_Implementation();
 
-	//void compSplinePointsToTrackArray(int32 nsp);
 	virtual	void compSplinePointsToTrackArray(int32 nsp);
 
-	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-	USplineMeshComponent* chunkSplineMesh;*/
+	virtual void RoundStart_Implementation() override;
+	virtual void RoundEnd_Implementation() override;
+	virtual void GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) override;
 };

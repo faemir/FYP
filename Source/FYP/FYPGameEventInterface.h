@@ -25,5 +25,5 @@ public:
 	void RoundEnd();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
-	void GateReached();
+	void GateReached(FLinearColor newColour, float playRate, float colourDist);
 };

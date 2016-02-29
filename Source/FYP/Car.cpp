@@ -41,6 +41,6 @@ void ACar::RoundEnd_Implementation() {
 	//return("RoundEnd_Implementation()");
 }
 
-void ACar::GateReached_Implementation() {
+void ACar::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 	//return("GateReached_Implementation()");
 }

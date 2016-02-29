@@ -44,6 +44,9 @@ void ATimeGate::Tick( float DeltaTime )
 
 //overlap event (when the player drives through it)
 void ATimeGate::OnOverlapBegin(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+	float playRate = 1.f;
+	float colourDist = 100000.f;
+	FLinearColor newColour = UKismetMathLibrary::MakeColor(UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), 1.0f);
 	UE_LOG(LogTemp, Log, TEXT("overlap begin!"));
 	if (OtherActor->GetClass()->IsChildOf(ACar::StaticClass())) {
 		UE_LOG(LogTemp, Log, TEXT("car overlap!"));
@@ -57,7 +60,7 @@ void ATimeGate::OnOverlapBegin(class AActor* OtherActor, class UPrimitiveCompone
 			//Run the Event specific to the actor, if the actor has the interface
 			if (TheInterface)
 			{
-				TheInterface->GateReached_Implementation();
+				TheInterface->GateReached_Implementation(newColour, playRate, colourDist);
 			}
 			++ActorItr;
 		}
@@ -99,6 +102,6 @@ void ATimeGate::RoundEnd_Implementation() {
 }
 
 //we've passed the gate, so destroy it!
-void ATimeGate::GateReached_Implementation() {
+void ATimeGate::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 
 }
