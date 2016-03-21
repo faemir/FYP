@@ -33,13 +33,22 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	AFYPStartSpline* startingSpline;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	int32 gatesPassed;
+
+	bool firstGatePass;
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void AddChunk();
 	void AddChunk_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
-	void RemoveChunk(int32 chunkToRemove);
-	void RemoveChunk_Implementation(int32 chunkToRemove);
+	void RemoveChunk();
+	void RemoveChunk_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
+	void AddStopMesh();
+	void AddStopMesh_Implementation();
 	
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;

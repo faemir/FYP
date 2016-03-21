@@ -13,6 +13,8 @@ AFYPChunkManager::AFYPChunkManager()
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("root scene comp"));
 	RootComponent = SceneComponent;
 	RootComponent->SetMobility(EComponentMobility::Static);
+	firstGatePass = false;
+	gatesPassed = 0;
 
 
 }
@@ -72,8 +74,25 @@ void AFYPChunkManager::AddChunk_Implementation() {
 	}
 }
 
-void AFYPChunkManager::RemoveChunk_Implementation(int32 chunkToRemove) {
-
+void AFYPChunkManager::RemoveChunk_Implementation() {
+	if (firstGatePass == false) {
+		for (TActorIterator<AFYPStartSpline> ActorItr(GetWorld()); ActorItr; ++ActorItr) {
+			// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
+			AFYPStartSpline *Mesh = *ActorItr;
+			if (Mesh != nullptr) {
+				Mesh->Destroy();
+			}
+		}
+		firstGatePass = true;
+	}
+	else {
+		levelChunks[0]->Destroy();
+		for (int32 i = 0; i < levelChunks[0]->Segments.Num(); i++) {
+			levelChunks[0]->Segments[i]->Destroy();
+		}
+		levelChunks.RemoveAt(0);
+	}
+	gatesPassed++;
 }
 
 void AFYPChunkManager::RoundStart_Implementation() {
@@ -86,4 +105,10 @@ void AFYPChunkManager::RoundEnd_Implementation() {
 
 void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 	AddChunk_Implementation();
+	RemoveChunk_Implementation();
+	AddStopMesh_Implementation();
+}
+
+void AFYPChunkManager::AddStopMesh_Implementation() {
+
 }
