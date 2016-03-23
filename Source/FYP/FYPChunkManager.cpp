@@ -15,8 +15,6 @@ AFYPChunkManager::AFYPChunkManager()
 	RootComponent->SetMobility(EComponentMobility::Static);
 	firstGatePass = false;
 	gatesPassed = 0;
-
-
 }
 
 // Called when the game starts or when spawned
@@ -27,6 +25,7 @@ void AFYPChunkManager::BeginPlay()
 	AddChunk_Implementation();
 	FTimerHandle THandle;
 	GetWorldTimerManager().SetTimer(THandle, this, &AFYPChunkManager::AddChunk_Implementation, 0.5f);
+	gatesPassed = 0;
 }
 
 // Called every frame
@@ -92,7 +91,7 @@ void AFYPChunkManager::RemoveChunk_Implementation() {
 		}
 		levelChunks.RemoveAt(0);
 	}
-	gatesPassed++;
+	gatesPassed += 1;
 }
 
 void AFYPChunkManager::RoundStart_Implementation() {
@@ -110,5 +109,4 @@ void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float 
 }
 
 void AFYPChunkManager::AddStopMesh_Implementation() {
-
 }
