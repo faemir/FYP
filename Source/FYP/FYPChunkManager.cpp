@@ -15,6 +15,7 @@ AFYPChunkManager::AFYPChunkManager()
 	RootComponent->SetMobility(EComponentMobility::Static);
 	firstGatePass = false;
 	gatesPassed = 0;
+	changeColour = false;
 }
 
 // Called when the game starts or when spawned
@@ -105,6 +106,7 @@ void AFYPChunkManager::RoundEnd_Implementation() {
 void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 	AddChunk_Implementation();
 	RemoveChunk_Implementation();
+	changeColour = true;
 	AddStopMesh_Implementation();
 }
 

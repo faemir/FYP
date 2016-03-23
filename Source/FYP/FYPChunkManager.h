@@ -36,6 +36,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	int32 gatesPassed;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	bool changeColour;
+
 	bool firstGatePass;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
