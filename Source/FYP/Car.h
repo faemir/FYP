@@ -6,6 +6,31 @@
 #include "FYPGameEventInterface.h"
 #include "Car.generated.h"
 
+USTRUCT(BlueprintType)
+struct FPlayerStats
+{
+	GENERATED_USTRUCT_BODY()
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+		float averageSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+		float topSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+		float averageTimeLeft;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+		int32 brakesUsed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+		int32 collisions;
+
+	FPlayerStats() {
+
+	}
+};
+
 UCLASS()
 class FYP_API ACar : public APawn, public IFYPGameEventInterface
 {
@@ -20,6 +45,9 @@ public:
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	FPlayerStats playerStats;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
