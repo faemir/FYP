@@ -103,5 +103,6 @@ void ATimeGate::RoundEnd_Implementation() {
 
 //we've passed the gate, so destroy it!
 void ATimeGate::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
-
+	ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	theCar->playerStats.averageTimeLeft = (timeLeft + theCar->playerStats.averageTimeLeft) / 2;
 }

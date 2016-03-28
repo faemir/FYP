@@ -66,6 +66,8 @@ void AFYPSpline::addNewChunk_Implementation(int32 ci, UStaticMesh* tm)
 	chunkSplineMesh->SetEndScale(FVector2D(1.0, 1.0));
 	chunkSplineMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	chunkSplineMesh->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	chunkSplineMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
+	chunkSplineMesh->bGenerateOverlapEvents = true;
 	FinishAndRegisterComponent(chunkSplineMesh);
 	listofsplinemeshes.Add(chunkSplineMesh);
 }

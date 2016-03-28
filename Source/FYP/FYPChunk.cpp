@@ -20,7 +20,7 @@ void AFYPChunk::BeginPlay()
 {
 	Super::BeginPlay();
 	if (!spawnedSegments) {
-		MakeSegments();
+		MakeSegments_Implementation();
 		spawnedSegments = true;
 	}
 }
@@ -63,13 +63,28 @@ void AFYPChunk::MakeSegments_Implementation()
 		FActorSpawnParameters SpawnParams;
 		FVector gLoc = { 0.f, 0.f, 0.f };
 		FRotator gRot = { 0.f, 0.f, 0.f };
-		ATimeGate* TGate = World->SpawnActor<ATimeGate>(ATimeGate::StaticClass(), gLoc, gRot, SpawnParams);
-		TGate->AttachRootComponentTo(RootComponent, NAME_None, EAttachLocation::KeepRelativeOffset, true);
-		TGate->SetActorEnableCollision(true);
-		TGate->timeGateMesh->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-		TGate->timeGateMesh->SetCollisionObjectType(ECollisionChannel::ECC_Destructible);
-		TGate->timeGateMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
-		//this->RegisterAllComponents();
+		chunksTimeGate = World->SpawnActor<ATimeGate>(ATimeGate::StaticClass(), gLoc, gRot, SpawnParams);
+		chunksTimeGate->AttachRootComponentTo(RootComponent, NAME_None, EAttachLocation::KeepRelativeOffset, true);
+		chunksTimeGate->SetActorEnableCollision(true);
+		chunksTimeGate->timeGateMesh->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		chunksTimeGate->timeGateMesh->SetCollisionObjectType(ECollisionChannel::ECC_Destructible);
+		chunksTimeGate->timeGateMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
+
+		AFYPGameMode* GameMode = Cast<AFYPGameMode>(GetWorld()->GetAuthGameMode());
+		if (GameMode->firstChunk) {
+			chunksTimeGate->isActive = true;
+			GameMode->firstChunk = false;
+		}
 	}
+}
+
+void AFYPChunk::SetActive() {
+	if (spawnedSegments) {
+		chunksTimeGate->isActive = true;
+	}
+}
+
+void AFYPChunk::SetUnActive() {
+	chunksTimeGate->isActive = false;
 }
 

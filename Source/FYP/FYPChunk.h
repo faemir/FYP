@@ -6,6 +6,7 @@
 #include "FYPSpline.h"
 #include "TimeGate.h"
 #include "EngineUtils.h"
+#include "FYPGameMode.h"
 #include "FYPChunk.generated.h"
 
 UCLASS()
@@ -19,7 +20,7 @@ public:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
@@ -30,6 +31,10 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void MakeSegments();
 	void MakeSegments_Implementation();
+
+	void AFYPChunk::SetActive();
+
+	void AFYPChunk::SetUnActive();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	TArray<AFYPSpline* > Segments;

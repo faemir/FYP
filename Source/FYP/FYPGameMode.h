@@ -5,6 +5,7 @@
 #include "GameFramework/GameMode.h"
 #include "FYPGameEventInterface.h"
 #include "Car.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "FYPGameMode.generated.h"
 
 UCLASS()
@@ -28,8 +29,28 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	ACar* theCar;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	TArray<float> playerAbility;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	float WeightAS;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	float WeightATL;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	float WeightBU;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	float WeightC;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	float WeightTS;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	bool firstChunk;
+
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;
 	virtual void GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) override;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
+	void AssessPlayer();
+	void AssessPlayer_Implementation();
 	
 };

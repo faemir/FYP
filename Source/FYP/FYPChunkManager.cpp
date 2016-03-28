@@ -69,7 +69,6 @@ void AFYPChunkManager::AddChunk_Implementation() {
 			AFYPChunk* tailChunk = World->SpawnActor<AFYPChunk>(AFYPChunk::StaticClass(), newLoc, newRot, SpawnParams);
 			tailChunk->AttachRootComponentTo(RootComponent, NAME_None, EAttachLocation::KeepWorldPosition, true);
 			levelChunks.Add(tailChunk);
-
 		}
 	}
 }
