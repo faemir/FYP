@@ -25,7 +25,6 @@ void AFYPChunkManager::BeginPlay()
 	
 	AddChunk_Implementation();
 	FTimerHandle THandle;
-	GetWorldTimerManager().SetTimer(THandle, this, &AFYPChunkManager::AddChunk_Implementation, 0.5f);
 	gatesPassed = 0;
 }
 
@@ -103,8 +102,23 @@ void AFYPChunkManager::RoundEnd_Implementation() {
 }
 
 void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
+	for (TActorIterator<ATimeGate> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
+		ATimeGate *Gate = *ActorItr;
+		if (Gate->isActive) {
+			ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
+			theCar->playerStats.averageTimeLeft = (Gate->timeLeft + theCar->playerStats.averageTimeLeft) / 2;
+		}
+	}
 	AddChunk_Implementation();
 	RemoveChunk_Implementation();
+	for (TActorIterator<ATimeGate> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
+		ATimeGate *Gate = *ActorItr;
+		Gate->isActive = true;
+	}
 	changeColour = true;
 	AddStopMesh_Implementation();
 }

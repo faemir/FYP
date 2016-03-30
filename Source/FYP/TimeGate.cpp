@@ -20,6 +20,7 @@ ATimeGate::ATimeGate()
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> pbar(TEXT("/Game/Particles/P_ParticleBarrier.P_ParticleBarrier"));
 	gateParticle->Template = pbar.Object;
 	gateParticle->AttachTo(timeGateMesh);
+	gateTime = 10.0f;
 }
 
 // Called when the game starts or when spawned
@@ -34,12 +35,15 @@ void ATimeGate::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	if (isActive) {
+		if (!(GetWorldTimerManager().IsTimerActive(THandle))) {
+			StartCountDown_Implementation();
+		}
+	}
+
 	if (GetWorldTimerManager().IsTimerActive(THandle)) {
 		timeLeft = GetWorldTimerManager().GetTimerRemaining(THandle);
 	}
-
-	
-
 }
 
 //overlap event (when the player drives through it)
@@ -87,11 +91,12 @@ void ATimeGate::AlertRoundEnd() {
 		//Run the Event specific to the actor, if the actor has the interface
 		if (TheInterface)
 		{
-			TheInterface->RoundEnd();
+			TheInterface->RoundEnd_Implementation();
 		}
 		++ActorItr;
 	}
 }
+
 
 void ATimeGate::RoundStart_Implementation() {
 
@@ -103,6 +108,4 @@ void ATimeGate::RoundEnd_Implementation() {
 
 //we've passed the gate, so destroy it!
 void ATimeGate::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
-	ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	theCar->playerStats.averageTimeLeft = (timeLeft + theCar->playerStats.averageTimeLeft) / 2;
 }

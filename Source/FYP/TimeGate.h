@@ -27,7 +27,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	bool isActive;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-	float gateTime = 10.0f;
+	float gateTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	float timeLeft;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
@@ -45,7 +45,7 @@ public:
 	void OnOverlapBegin(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	void AlertRoundEnd();
-	
+
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;
 	virtual void GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) override;
