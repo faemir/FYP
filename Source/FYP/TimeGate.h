@@ -42,7 +42,7 @@ public:
 	void StartCountDown_Implementation();
 
 	UFUNCTION(Category = "MyVars")
-	void OnOverlapBegin(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void OnOverlapEnd(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	void AlertRoundEnd();
 

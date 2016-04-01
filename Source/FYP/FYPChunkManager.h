@@ -40,6 +40,11 @@ public:
 	bool changeColour;
 
 	bool firstGatePass;
+	bool doOnce;
+
+	FTimerHandle THandle;
+
+	void GateTimer();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void AddChunk();

@@ -14,7 +14,7 @@ ATimeGate::ATimeGate()
 	timeGateMesh->SetMobility(EComponentMobility::Movable);
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> timeg(TEXT("/Game/Meshes/timegate.timegate"));
 	timeGateMesh->SetStaticMesh(timeg.Object);
-	timeGateMesh->OnComponentBeginOverlap.AddDynamic(this, &ATimeGate::OnOverlapBegin);
+	timeGateMesh->OnComponentEndOverlap.AddDynamic(this, &ATimeGate::OnOverlapEnd);
 
 	gateParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("timegate particle effect"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> pbar(TEXT("/Game/Particles/P_ParticleBarrier.P_ParticleBarrier"));
@@ -47,7 +47,7 @@ void ATimeGate::Tick( float DeltaTime )
 }
 
 //overlap event (when the player drives through it)
-void ATimeGate::OnOverlapBegin(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+void ATimeGate::OnOverlapEnd(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) {
 	float playRate = 1.f;
 	float colourDist = 100000.f;
 	FLinearColor newColour = UKismetMathLibrary::MakeColor(UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), 1.0f);

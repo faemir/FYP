@@ -16,6 +16,7 @@ AFYPChunkManager::AFYPChunkManager()
 	firstGatePass = false;
 	gatesPassed = 0;
 	changeColour = false;
+	doOnce = true;
 }
 
 // Called when the game starts or when spawned
@@ -82,6 +83,7 @@ void AFYPChunkManager::RemoveChunk_Implementation() {
 			}
 		}
 		firstGatePass = true;
+		UE_LOG(LogTemp, Warning, TEXT("delete start spline"));
 	}
 	else {
 		levelChunks[0]->Destroy();
@@ -89,6 +91,7 @@ void AFYPChunkManager::RemoveChunk_Implementation() {
 			levelChunks[0]->Segments[i]->Destroy();
 		}
 		levelChunks.RemoveAt(0);
+		UE_LOG(LogTemp, Warning, TEXT("deleted chunk"));
 	}
 	gatesPassed += 1;
 }
@@ -102,25 +105,35 @@ void AFYPChunkManager::RoundEnd_Implementation() {
 }
 
 void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
-	for (TActorIterator<ATimeGate> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	{
-		// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
-		ATimeGate *Gate = *ActorItr;
-		if (Gate->isActive) {
-			ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
-			theCar->playerStats.averageTimeLeft = (Gate->timeLeft + theCar->playerStats.averageTimeLeft) / 2;
+	if (doOnce) {
+		UE_LOG(LogTemp, Log, TEXT("chunk manager gate reached"));
+		for (TActorIterator<ATimeGate> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+		{
+			// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
+			ATimeGate *Gate = *ActorItr;
+			if (Gate->isActive) {
+				ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
+				theCar->playerStats.averageTimeLeft = (Gate->timeLeft + theCar->playerStats.averageTimeLeft) / 2;
+			}
 		}
+		AddChunk_Implementation();
+		RemoveChunk_Implementation();
+		for (TActorIterator<ATimeGate> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+		{
+			// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
+			ATimeGate *Gate = *ActorItr;
+			Gate->isActive = true;
+		}
+		changeColour = true;
+		AddStopMesh_Implementation();
+		doOnce = false;
+		GetWorldTimerManager().SetTimer(THandle, this, &AFYPChunkManager::GateTimer, 1.0f);
 	}
-	AddChunk_Implementation();
-	RemoveChunk_Implementation();
-	for (TActorIterator<ATimeGate> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	{
-		// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
-		ATimeGate *Gate = *ActorItr;
-		Gate->isActive = true;
-	}
-	changeColour = true;
-	AddStopMesh_Implementation();
+}
+
+void AFYPChunkManager::GateTimer() {
+	doOnce = true;
+	GetWorldTimerManager().ClearTimer(THandle);
 }
 
 void AFYPChunkManager::AddStopMesh_Implementation() {
