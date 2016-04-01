@@ -103,7 +103,12 @@ void ATimeGate::RoundStart_Implementation() {
 }
 
 void ATimeGate::RoundEnd_Implementation() {
-
+	UE_LOG(LogTemp, Warning, TEXT("Game Over! (from timegate timer)"));
+	if (isActive) {
+		GetWorldTimerManager().ClearTimer(THandle);
+	}
+	AFYPPlayerController* playerCon = Cast<AFYPPlayerController>(GetWorld()->GetFirstPlayerController());
+	playerCon->gameOver = true;
 }
 
 //we've passed the gate, so destroy it!

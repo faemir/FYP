@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "FYPGameEventInterface.h"
 #include "Car.h"
+#include "FYPPlayerController.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "TimeGate.generated.h"
 

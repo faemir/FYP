@@ -3,6 +3,10 @@
 #include "FYP.h"
 #include "FYPPlayerController.h"
 
+AFYPPlayerController::AFYPPlayerController() {
+	gameOver = false;
+}
+
 void AFYPPlayerController::RoundStart_Implementation() {
 
 }
