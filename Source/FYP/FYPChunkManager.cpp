@@ -113,7 +113,12 @@ void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float 
 			ATimeGate *Gate = *ActorItr;
 			if (Gate->isActive) {
 				ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
-				theCar->playerStats.averageTimeLeft = (Gate->timeLeft + theCar->playerStats.averageTimeLeft) / 2;
+				if (theCar->playerStats.averageTimeLeft == 0) {
+					theCar->playerStats.averageTimeLeft = (Gate->timeLeft);
+				}
+				else {
+					theCar->playerStats.averageTimeLeft = (Gate->timeLeft + theCar->playerStats.averageTimeLeft) / 2;
+				}
 			}
 		}
 		AddChunk_Implementation();
