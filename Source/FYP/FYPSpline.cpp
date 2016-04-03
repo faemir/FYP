@@ -44,6 +44,7 @@ void AFYPSpline::OnConstruction(const FTransform & Transform)
 		addNewChunk_Implementation(i, trackChunk);
 	}
 	FString tempstr = FString::FromInt(theSpline->GetNumberOfSplinePoints());
+	theSpline->bSplineHasBeenEdited = true;
 }
 
 //Takes the spline loc/tan and creates a spline mesh according to it
