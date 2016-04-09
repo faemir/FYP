@@ -12,13 +12,18 @@ AFYPChunk::AFYPChunk()
 	RootComponent = SceneComponent;
 	RootComponent->SetMobility(EComponentMobility::Movable);
 	spawnedSegments = false;
-	chunkScore = 1;
+	chunkScore = 5;
 }
 
 // Called when the game starts or when spawned
 void AFYPChunk::BeginPlay()
 {
 	Super::BeginPlay();
+
+	//get the incremented number of spline pieces for this chunk
+	AFYPGameMode* GameMode = Cast<AFYPGameMode>(GetWorld()->GetAuthGameMode());
+	chunkScore = GameMode->chunkScore;
+
 	if (!spawnedSegments) {
 		MakeSegments_Implementation();
 		spawnedSegments = true;

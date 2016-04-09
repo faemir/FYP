@@ -44,6 +44,10 @@ public:
 	float WeightTS;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	bool firstChunk;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	int chunkScore;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	int chunkIncTime;
 
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;

@@ -19,8 +19,20 @@ void AFYPGameMode::BeginPlay()
 
 }
 
-void AFYPGameMode::Tick(float DeltaTime)
-{
+void AFYPGameMode::Tick(float DeltaTime) {
+	//every x seconds of game time, increment  number of pieces per chunk
+	//If the player is doing particularly well, then ramp up quicker
+	int wTime = UGameplayStatics::GetRealTimeSeconds(GetWorld());
+	wTime = wTime % chunkIncTime;
+	if (wTime == 0) {
+		if (playerAbility[playerAbility.Num()-1] > 3) {
+			chunkScore += 2;
+			UE_LOG(LogTemp, Warning, TEXT("chunkScore is now %d"), chunkScore);
+		} else {
+			chunkScore += 1;
+			UE_LOG(LogTemp, Warning, TEXT("chunkScore is now %d"), chunkScore);
+		}
+	}
 
 }
 
@@ -53,7 +65,7 @@ void AFYPGameMode::AssessPlayer_Implementation() {
 		//map to discrete range for assessment purposes
 		float scaledAveSpeed = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 15.f), FVector2D(0.f, 1.f), avgStats.averageSpeed);
 		float scaledAveTime = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 15.f), FVector2D(0.f, 1.f), avgStats.averageTimeLeft);
-		float scaledBrakes = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 30.f), FVector2D(0.f, 1.f), avgStats.brakesUsed);
+		float scaledBrakes = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 30.f), FVector2D(1.f, 0.f), avgStats.brakesUsed);
 		float scaledCol = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 15.f), FVector2D(0.f, 1.f), avgStats.collisions);
 		float scaledTopSpeed = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 15.f), FVector2D(0.f, 1.f), avgStats.topSpeed);
 		//multiple by the weighting for each value
