@@ -188,6 +188,10 @@ public:
 	void storeSplinePoints();
 	virtual void storeSplinePoints_Implementation();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
+	TArray<FSplinePoints> chooseSpline();
+	virtual TArray<FSplinePoints> chooseSpline_Implementation();
+
 	virtual	void compSplinePointsToTrackArray(int32 nsp);
 
 	virtual void RoundStart_Implementation() override;

@@ -49,6 +49,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	int chunkIncTime;
 
+	void AFYPGameMode::IncrementChunk();
+
 	virtual void RoundStart_Implementation() override;
 	virtual void RoundEnd_Implementation() override;
 	virtual void GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) override;

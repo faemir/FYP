@@ -74,8 +74,9 @@ void AFYPSpline::addNewChunk_Implementation(int32 ci, UStaticMesh* tm)
 	listofsplinemeshes.Add(chunkSplineMesh);
 }
 
-void AFYPSpline::storeSplinePoints_Implementation()
-{
+//Picks the spline shape, uses the playerAbility to choose
+//the difficulty variant of said shape
+TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
 	TArray<FSplinePoints> tempChosenPieceArray;
 	int32 ranTrackPiece = UKismetMathLibrary::RandomIntegerInRange(0, 6);
 	switch (ranTrackPiece) {
@@ -104,6 +105,13 @@ void AFYPSpline::storeSplinePoints_Implementation()
 		tempChosenPieceArray = trackPiecesList.straight;
 		break;
 	}
+	return(tempChosenPieceArray);
+}
+
+//Calls ChooseSpline then stores the location and tangents for this particular spline.
+void AFYPSpline::storeSplinePoints_Implementation()
+{
+	TArray<FSplinePoints> tempChosenPieceArray = chooseSpline_Implementation();
 
 	for (int32 j = 0; j < tempChosenPieceArray.Num(); j++) {
 		FSplinePoints tempSplinePoint = tempChosenPieceArray[j];

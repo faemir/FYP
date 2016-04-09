@@ -131,6 +131,11 @@ void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float 
 		}
 		changeColour = true;
 		AddStopMesh_Implementation();
+
+		//call chunk increment in gamemode
+		AFYPGameMode* GameMode = Cast<AFYPGameMode>(GetWorld()->GetAuthGameMode());
+		GameMode->IncrementChunk();
+
 		doOnce = false;
 		GetWorldTimerManager().SetTimer(THandle, this, &AFYPChunkManager::GateTimer, 1.0f);
 	}

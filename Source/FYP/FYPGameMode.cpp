@@ -12,6 +12,8 @@ AFYPGameMode::AFYPGameMode()
 	WeightC = 2.f;
 	WeightTS = 0.25f;
 	firstChunk = true;
+	chunkIncTime = 30;
+	playerAbility.Add(2.5f); //start player at middle ability
 }
 
 void AFYPGameMode::BeginPlay()
@@ -20,27 +22,27 @@ void AFYPGameMode::BeginPlay()
 }
 
 void AFYPGameMode::Tick(float DeltaTime) {
-	//every x seconds of game time, increment  number of pieces per chunk
-	//If the player is doing particularly well, then ramp up quicker
-	int wTime = UGameplayStatics::GetRealTimeSeconds(GetWorld());
-	wTime = wTime % chunkIncTime;
-	if (wTime == 0) {
-		if (playerAbility[playerAbility.Num()-1] > 3) {
-			chunkScore += 2;
-			UE_LOG(LogTemp, Warning, TEXT("chunkScore is now %d"), chunkScore);
-		} else {
-			chunkScore += 1;
-			UE_LOG(LogTemp, Warning, TEXT("chunkScore is now %d"), chunkScore);
-		}
-	}
 
 }
 
-//Add performance snapshot when passing each gate
+//- Add performance snapshot when passing each gate
 void AFYPGameMode::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 	ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	FPlayerStats tempStats = theCar->playerStats;
 	playerStats.Add(tempStats);
+}
+
+//- Increment number of pieces per chunk
+//- If the player is doing particularly well, then ramp up quicker!
+void AFYPGameMode::IncrementChunk() {
+	if (playerAbility[playerAbility.Num() - 1] > 3) {
+		chunkScore += 2;
+		UE_LOG(LogTemp, Warning, TEXT("chunkScore is now %d"), chunkScore);
+	}
+	else {
+		chunkScore += 1;
+		UE_LOG(LogTemp, Warning, TEXT("chunkScore is now %d"), chunkScore);
+	}
 }
 
 void AFYPGameMode::RoundStart_Implementation() {
