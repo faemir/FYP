@@ -7,6 +7,7 @@
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "FYPGameMode.h"
 #include "FYPSpline.generated.h"
 
 

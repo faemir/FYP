@@ -77,28 +77,33 @@ void AFYPSpline::addNewChunk_Implementation(int32 ci, UStaticMesh* tm)
 //Picks the spline shape, uses the playerAbility to choose
 //the difficulty variant of said shape
 TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
+	AFYPGameMode* tempGameMode = Cast<AFYPGameMode>(GetWorld()->GetAuthGameMode());
+	float playerAbility = tempGameMode->playerAbility[tempGameMode->playerAbility.Num()-1];
 	TArray<FSplinePoints> tempChosenPieceArray;
+
+	int32 pieceVariant = std::nearbyintf(FMath::GetMappedRangeValueClamped(FVector2D(0.f, 5.f), FVector2D(0.f, 9.f), playerAbility));
 	int32 ranTrackPiece = UKismetMathLibrary::RandomIntegerInRange(0, 6);
+
 	switch (ranTrackPiece) {
-	case 0:
+	case 0: // straight
 		tempChosenPieceArray = trackPiecesList.straight;
 		break;
-	case 1:
+	case 1: //right curve strong
 		tempChosenPieceArray = trackPiecesList.rightCurveStrong;
 		break;
-	case 2:
+	case 2: // left curve strong
 		tempChosenPieceArray = trackPiecesList.leftCurveStrong;
 		break;
-	case 3:
+	case 3: // right curve light
 		tempChosenPieceArray = trackPiecesList.rightCurveLight;
 		break;
-	case 4:
+	case 4: // left curve light
 		tempChosenPieceArray = trackPiecesList.leftCurveLight;
 		break;
-	case 5:
+	case 5: // s-bend right
 		tempChosenPieceArray = trackPiecesList.sBendRight;
 		break;
-	case 6:
+	case 6: // s-bend left
 		tempChosenPieceArray = trackPiecesList.sBendLeft;
 		break;
 	default:
