@@ -11,20 +11,20 @@ struct FPlayerStats
 {
 	GENERATED_USTRUCT_BODY()
 
-		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-		float averageSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	float averageSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-		float topSpeed;
+	float topSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-		float averageTimeLeft;
+	float averageTimeLeft;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-		int32 brakesUsed;
+	float brakesUsed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
-		int32 collisions;
+	float collisions;
 
 	FPlayerStats() {
 
