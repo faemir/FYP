@@ -20,7 +20,7 @@ ATimeGate::ATimeGate()
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> pbar(TEXT("/Game/Particles/P_ParticleBarrier.P_ParticleBarrier"));
 	gateParticle->Template = pbar.Object;
 	gateParticle->AttachTo(timeGateMesh);
-	gateTime = 10.0f;
+	gateTime = 20.0f;
 }
 
 // Called when the game starts or when spawned

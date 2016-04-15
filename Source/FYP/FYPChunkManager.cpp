@@ -26,7 +26,6 @@ void AFYPChunkManager::BeginPlay()
 	
 	AddChunk_Implementation();
 	FTimerHandle THandle;
-	gatesPassed = 0;
 }
 
 // Called every frame
@@ -93,7 +92,9 @@ void AFYPChunkManager::RemoveChunk_Implementation() {
 		levelChunks.RemoveAt(0);
 		UE_LOG(LogTemp, Warning, TEXT("deleted chunk"));
 	}
-	gatesPassed += 1;
+	AFYPGameMode* GameMode = Cast<AFYPGameMode>(GetWorld()->GetAuthGameMode());
+	GameMode->gatesPassed += 1;
+	gatesPassed = GameMode->gatesPassed;
 }
 
 void AFYPChunkManager::RoundStart_Implementation() {
@@ -135,6 +136,14 @@ void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float 
 		//call chunk increment in gamemode
 		AFYPGameMode* GameMode = Cast<AFYPGameMode>(GetWorld()->GetAuthGameMode());
 		GameMode->IncrementChunk();
+
+		//copy stats from car to gamemode
+		ACar* theCar = Cast<ACar>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		FPlayerStats tempStats = theCar->playerStats;
+		GameMode->playerStats.Add(tempStats);
+
+		//assess player for next chunk
+		GameMode->AssessPlayer_Implementation();
 
 		doOnce = false;
 		GetWorldTimerManager().SetTimer(THandle, this, &AFYPChunkManager::GateTimer, 1.0f);

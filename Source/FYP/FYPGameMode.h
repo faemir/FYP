@@ -48,6 +48,8 @@ public:
 	int chunkScore;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	int chunkIncTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	int gatesPassed;
 
 	void AFYPGameMode::IncrementChunk();
 
