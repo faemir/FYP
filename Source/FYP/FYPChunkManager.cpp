@@ -13,6 +13,9 @@ AFYPChunkManager::AFYPChunkManager()
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("root scene comp"));
 	RootComponent = SceneComponent;
 	RootComponent->SetMobility(EComponentMobility::Static);
+
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> backp(TEXT("/Game/Meshes/backpiece.backpiece"));
+	backpo = backp.Object;
 	firstGatePass = false;
 	gatesPassed = 0;
 	changeColour = false;

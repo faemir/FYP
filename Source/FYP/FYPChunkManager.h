@@ -39,6 +39,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	bool changeColour;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	UStaticMesh* backpo;
+
 	bool firstGatePass;
 	bool doOnce;
 
