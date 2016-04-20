@@ -51,12 +51,12 @@ void AFYPSpline::OnConstruction(const FTransform & Transform)
 void AFYPSpline::addNewChunk_Implementation(int32 ci, UStaticMesh* tm)
 {
 	int32 curSplinePoint = ci;
-	int32 nextSplinePoint = (curSplinePoint + 1) % NumSplinePoints; //why did I do this again??
+	int32 nextSplinePoint = (curSplinePoint + 1) % NumSplinePoints; //in case of looping
 	FVector curLoc = theSpline->GetLocationAtSplinePoint(curSplinePoint, ESplineCoordinateSpace::Local);
 	FVector curTang = theSpline->GetTangentAtSplinePoint(curSplinePoint, ESplineCoordinateSpace::Local);
 	FVector nextLoc = theSpline->GetLocationAtSplinePoint(nextSplinePoint, ESplineCoordinateSpace::Local);
 	FVector nextTang = theSpline->GetTangentAtSplinePoint(nextSplinePoint, ESplineCoordinateSpace::Local);
-	UStaticMesh* trackChunkStaticMesh = tm; //could use tm directly
+	UStaticMesh* trackChunkStaticMesh = tm;
 	USplineMeshComponent* chunkSplineMesh = NewObject<USplineMeshComponent>(this, NAME_None);
 	chunkSplineMesh->CreationMethod = EComponentCreationMethod::UserConstructionScript;
 	chunkSplineMesh->SetMobility(EComponentMobility::Movable); //needed because root comp is movable
