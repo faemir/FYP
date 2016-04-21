@@ -26,7 +26,6 @@ void AFYPGameMode::Tick(float DeltaTime) {
 
 }
 
-//- Add performance snapshot when passing each gate
 void AFYPGameMode::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 
 }
@@ -52,6 +51,7 @@ void AFYPGameMode::RoundEnd_Implementation() {
 	//return("RoundEnd_Implementation()");
 }
 
+//takes player performance stats and formulates final player ability from 0-5.f
 void AFYPGameMode::AssessPlayer_Implementation() {
 	//only start assessing after 4 gates are passed
 	if (playerStats.Num() > 4) {

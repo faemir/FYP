@@ -30,6 +30,7 @@ void AFYPSpline::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 }
 
+//called on spawning of object
 void AFYPSpline::OnConstruction(const FTransform & Transform)
 {
 	Super::OnConstruction(Transform);

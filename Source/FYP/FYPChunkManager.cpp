@@ -38,6 +38,8 @@ void AFYPChunkManager::Tick( float DeltaTime )
 
 }
 
+//adds new AFYPChunk in correct place when called
+//first chunk is setup a little differently
 void AFYPChunkManager::AddChunk_Implementation() {
 	UWorld* const World = GetWorld();
 	if (World) {
@@ -75,6 +77,7 @@ void AFYPChunkManager::AddChunk_Implementation() {
 	}
 }
 
+//removes first chunk once passed for performance and simplicity
 void AFYPChunkManager::RemoveChunk_Implementation() {
 	if (firstGatePass == false) {
 		for (TActorIterator<AFYPStartSpline> ActorItr(GetWorld()); ActorItr; ++ActorItr) {
@@ -108,6 +111,7 @@ void AFYPChunkManager::RoundEnd_Implementation() {
 	//return("RoundEnd_Implementation()");
 }
 
+//manages adding/removal calls for chunks, interface call, assess player call
 void AFYPChunkManager::GateReached_Implementation(FLinearColor newColour, float playRate, float colourDist) {
 	if (doOnce) {
 		UE_LOG(LogTemp, Log, TEXT("chunk manager gate reached"));

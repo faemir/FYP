@@ -79,6 +79,7 @@ void ATimeGate::StartCountDown_Implementation() {
 	GetWorldTimerManager().SetTimer(THandle, this, &ATimeGate::AlertRoundEnd, gateTime);
 }
 
+//when the player fails to reach this gate when its active
 void ATimeGate::AlertRoundEnd() {
 	//Actor iterator from https://wiki.unrealengine.com/Interfaces_in_C%2B%2B#Creating_Global_Events
 	IFYPGameEventInterface* TheInterface = NULL;

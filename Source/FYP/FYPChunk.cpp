@@ -44,6 +44,7 @@ void AFYPChunk::getLastSegSplineTrans_Implementation()
 	prevSeg = tempSpline->GetTransformAtSplinePoint(tempSpline->GetNumberOfSplinePoints() - 1, ESplineCoordinateSpace::World);
 }
 
+//creates all the AFYPSplines for this chunk + the checkpoint gate
 void AFYPChunk::MakeSegments_Implementation()
 {
 	int32 curChunkScore = 0;
@@ -83,12 +84,14 @@ void AFYPChunk::MakeSegments_Implementation()
 	}
 }
 
+//make this chunk the active one
 void AFYPChunk::SetActive() {
 	if (spawnedSegments) {
 		chunksTimeGate->isActive = true;
 	}
 }
 
+//make this chunk inactive
 void AFYPChunk::SetUnActive() {
 	chunksTimeGate->isActive = false;
 }
