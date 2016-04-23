@@ -72,7 +72,7 @@ void AFYPGameMode::AssessPlayer_Implementation() {
 		float scaledAveSpeed = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 18000.f), FVector2D(0.f, 1.f), avgStats.averageSpeed);
 		float scaledAveTime = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 10.f), FVector2D(0.f, 1.f), avgStats.averageTimeLeft);
 		float scaledBrakes = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 30.f), FVector2D(1.f, 0.f), avgStats.brakesUsed);
-		float scaledCol = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 15.f), FVector2D(0.f, 1.f), avgStats.collisions);
+		float scaledCol = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 15.f), FVector2D(1.f, 0.f), avgStats.collisions);
 		float scaledTopSpeed = FMath::GetMappedRangeValueClamped(FVector2D(0.f, 20000.f), FVector2D(0.f, 1.f), avgStats.topSpeed);
 		UE_LOG(LogTemp, Warning, TEXT("scaledAveSpeed is now %f"), scaledAveSpeed);
 		UE_LOG(LogTemp, Warning, TEXT("scaledAveTime is now %f"), scaledAveTime);
