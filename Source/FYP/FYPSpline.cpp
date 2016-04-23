@@ -91,28 +91,28 @@ TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
 			break;
 	}
 	case 1: { //right curve strong
-		if (playerAbility < 0.5f) {
+		if (playerAbility <= 0.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong1;
 		}
-		else if (playerAbility > 0.5f && playerAbility < 1.0f) {
+		else if (playerAbility > 0.5f && playerAbility <= 1.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong2;
 		}
-		else if (playerAbility > 1.0f && playerAbility < 1.5f) {
+		else if (playerAbility > 1.0f && playerAbility <= 1.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong3;
 		}
-		else if (playerAbility > 1.5f && playerAbility < 2.0f) {
+		else if (playerAbility > 1.5f && playerAbility <= 2.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong4;
 		}
-		else if (playerAbility > 2.0f && playerAbility < 2.5f) {
+		else if (playerAbility > 2.0f && playerAbility <= 2.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong5;
 		}
-		else if (playerAbility > 2.5f && playerAbility < 3.0f) {
+		else if (playerAbility > 2.5f && playerAbility <= 3.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong6;
 		}
-		else if (playerAbility > 3.0f && playerAbility < 3.5f) {
+		else if (playerAbility > 3.0f && playerAbility <= 3.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong7;
 		}
-		else if (playerAbility > 3.5f && playerAbility < 4.0f) {
+		else if (playerAbility > 3.5f && playerAbility <= 4.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveStrong8;
 		}
 		else if (playerAbility > 4.0f) {
@@ -124,28 +124,28 @@ TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
 		break;
 	}
 	case 2: { //left curve strong
-		if (playerAbility < 0.5f) {
+		if (playerAbility <= 0.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong1;
 		}
-		else if (playerAbility > 0.5f && playerAbility < 1.0f) {
+		else if (playerAbility > 0.5f && playerAbility <= 1.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong2;
 		}
-		else if (playerAbility > 1.0f && playerAbility < 1.5f) {
+		else if (playerAbility > 1.0f && playerAbility <= 1.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong3;
 		}
-		else if (playerAbility > 1.5f && playerAbility < 2.0f) {
+		else if (playerAbility > 1.5f && playerAbility <= 2.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong4;
 		}
-		else if (playerAbility > 2.0f && playerAbility < 2.5f) {
+		else if (playerAbility > 2.0f && playerAbility <= 2.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong5;
 		}
-		else if (playerAbility > 2.5f && playerAbility < 3.0f) {
+		else if (playerAbility > 2.5f && playerAbility <= 3.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong6;
 		}
-		else if (playerAbility > 3.0f && playerAbility < 3.5f) {
+		else if (playerAbility > 3.0f && playerAbility <= 3.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong7;
 		}
-		else if (playerAbility > 3.5f && playerAbility < 4.0f) {
+		else if (playerAbility > 3.5f && playerAbility <= 4.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveStrong8;
 		}
 		else if (playerAbility > 4.0f) {
@@ -157,28 +157,28 @@ TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
 		break;
 	}
 	case 3: { //right curve light
-		if (playerAbility < 0.5f) {
+		if (playerAbility <= 0.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight1;
 		}
-		else if (playerAbility > 0.5f && playerAbility < 1.0f) {
+		else if (playerAbility > 0.5f && playerAbility <= 1.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight2;
 		}
-		else if (playerAbility > 1.0f && playerAbility < 1.5f) {
+		else if (playerAbility > 1.0f && playerAbility <= 1.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight3;
 		}
-		else if (playerAbility > 1.5f && playerAbility < 2.0f) {
+		else if (playerAbility > 1.5f && playerAbility <= 2.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight4;
 		}
-		else if (playerAbility > 2.0f && playerAbility < 2.5f) {
+		else if (playerAbility > 2.0f && playerAbility <= 2.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight5;
 		}
-		else if (playerAbility > 2.5f && playerAbility < 3.0f) {
+		else if (playerAbility > 2.5f && playerAbility <= 3.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight6;
 		}
-		else if (playerAbility > 3.0f && playerAbility < 3.5f) {
+		else if (playerAbility > 3.0f && playerAbility <= 3.5f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight7;
 		}
-		else if (playerAbility > 3.5f && playerAbility < 4.0f) {
+		else if (playerAbility > 3.5f && playerAbility <= 4.0f) {
 			tempChosenPieceArray = trackPiecesList.rightCurveLight8;
 		}
 		else if (playerAbility > 4.0f) {
@@ -190,28 +190,28 @@ TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
 		break;
 	}
 	case 4: { //left curve light
-		if (playerAbility < 0.5f) {
+		if (playerAbility <= 0.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight1;
 		}
-		else if (playerAbility > 0.5f && playerAbility < 1.0f) {
+		else if (playerAbility > 0.5f && playerAbility <= 1.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight2;
 		}
-		else if (playerAbility > 1.0f && playerAbility < 1.5f) {
+		else if (playerAbility > 1.0f && playerAbility <= 1.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight3;
 		}
-		else if (playerAbility > 1.5f && playerAbility < 2.0f) {
+		else if (playerAbility > 1.5f && playerAbility <= 2.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight4;
 		}
-		else if (playerAbility > 2.0f && playerAbility < 2.5f) {
+		else if (playerAbility > 2.0f && playerAbility <= 2.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight5;
 		}
-		else if (playerAbility > 2.5f && playerAbility < 3.0f) {
+		else if (playerAbility > 2.5f && playerAbility <= 3.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight6;
 		}
-		else if (playerAbility > 3.0f && playerAbility < 3.5f) {
+		else if (playerAbility > 3.0f && playerAbility <= 3.5f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight7;
 		}
-		else if (playerAbility > 3.5f && playerAbility < 4.0f) {
+		else if (playerAbility > 3.5f && playerAbility <= 4.0f) {
 			tempChosenPieceArray = trackPiecesList.leftCurveLight8;
 		}
 		else if (playerAbility > 4.0f) {
@@ -223,28 +223,28 @@ TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
 		break;
 	}
 	case 5: { //s-bend right
-		if (playerAbility < 0.5f) {
+		if (playerAbility <= 0.5f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend1;
 		}
-		else if (playerAbility > 0.5f && playerAbility < 1.0f) {
+		else if (playerAbility > 0.5f && playerAbility <= 1.0f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend2;
 		}
-		else if (playerAbility > 1.0f && playerAbility < 1.5f) {
+		else if (playerAbility > 1.0f && playerAbility <= 1.5f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend3;
 		}
-		else if (playerAbility > 1.5f && playerAbility < 2.0f) {
+		else if (playerAbility > 1.5f && playerAbility <= 2.0f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend4;
 		}
-		else if (playerAbility > 2.0f && playerAbility < 2.5f) {
+		else if (playerAbility > 2.0f && playerAbility <= 2.5f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend5;
 		}
-		else if (playerAbility > 2.5f && playerAbility < 3.0f) {
+		else if (playerAbility > 2.5f && playerAbility <= 3.0f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend6;
 		}
-		else if (playerAbility > 3.0f && playerAbility < 3.5f) {
+		else if (playerAbility > 3.0f && playerAbility <= 3.5f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend7;
 		}
-		else if (playerAbility > 3.5f && playerAbility < 4.0f) {
+		else if (playerAbility > 3.5f && playerAbility <= 4.0f) {
 			tempChosenPieceArray = trackPiecesList.rightSBend8;
 		}
 		else if (playerAbility > 4.0f) {
@@ -256,28 +256,28 @@ TArray<FSplinePoints> AFYPSpline::chooseSpline_Implementation() {
 		break;
 	}
 	case 6: { //s-bend left
-		if (playerAbility < 0.5f) {
+		if (playerAbility <= 0.5f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend1;
 		}
-		else if (playerAbility > 0.5f && playerAbility < 1.0f) {
+		else if (playerAbility > 0.5f && playerAbility <= 1.0f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend2;
 		}
-		else if (playerAbility > 1.0f && playerAbility < 1.5f) {
+		else if (playerAbility > 1.0f && playerAbility <= 1.5f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend3;
 		}
-		else if (playerAbility > 1.5f && playerAbility < 2.0f) {
+		else if (playerAbility > 1.5f && playerAbility <= 2.0f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend4;
 		}
-		else if (playerAbility > 2.0f && playerAbility < 2.5f) {
+		else if (playerAbility > 2.0f && playerAbility <= 2.5f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend5;
 		}
-		else if (playerAbility > 2.5f && playerAbility < 3.0f) {
+		else if (playerAbility > 2.5f && playerAbility <= 3.0f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend6;
 		}
-		else if (playerAbility > 3.0f && playerAbility < 3.5f) {
+		else if (playerAbility > 3.0f && playerAbility <= 3.5f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend7;
 		}
-		else if (playerAbility > 3.5f && playerAbility < 4.0f) {
+		else if (playerAbility > 3.5f && playerAbility <= 4.0f) {
 			tempChosenPieceArray = trackPiecesList.leftSBend8;
 		}
 		else if (playerAbility > 4.0f) {
