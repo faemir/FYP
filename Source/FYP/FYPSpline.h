@@ -695,6 +695,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
 	TArray<USplineMeshComponent*> listofsplinemeshes;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MyVars")
+	bool dynMatCreated;
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyVars")
 	void addNewChunk(int32 ci, UStaticMesh* tm);
